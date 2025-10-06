@@ -3,15 +3,15 @@ import mysql.connector
 
 class gestordb:
 
-    def __init__(self, host, usuario, clave, puerto):
+    def prueba_Conectividad(
+        self, host="Localhost", usuario="root", clave="", puerto=3306
+    ):
         try:
             mydb = mysql.connector.connect(
                 host=host, user=usuario, password=clave, port=puerto
             )
             cursor = mydb.cursor()
-            cursor.execute("show databases")
-            for db in cursor:
-                print(db)
+            return "Prueba de conectividad a la db Exitosa"
 
         except mysql.connector.Error as err:
             print(f"Error: {err}")

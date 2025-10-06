@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 import LogicaDB as lg
+from tkinter import messagebox as ms
 
 
 class ventanas:
@@ -13,6 +14,12 @@ class ventanas:
 
         self.frameConexion = ttk.Frame(self.notebookConexion, width=400, height=280)
         self.frameConexion.grid(column=0, row=0, padx=10, pady=10)
+
+        self.frameListado = ttk.Frame(self.notebookConexion, width=400, height=280)
+        self.frameListado.grid(column=0, row=0, padx=10, pady=10)
+
+        self.notebookConexion.add(self.frameConexion, text="Prueba Conexion")
+        self.notebookConexion.add(self.frameListado, text="Listado DBs")
 
         self.labelframeConexion = ttk.LabelFrame(
             self.frameConexion, text="Datos de Conexion"
@@ -62,16 +69,24 @@ class ventanas:
         )
         self.botonConexionDB.grid(column=1, row=4, padx=10, pady=10)
 
+
+
+
+
         self.ventana.mainloop()
 
     def probar_conexion(self):
-        prueba = lg.gestordb(
+        prueba = lg.gestordb()
+        resultado = prueba.prueba_Conectividad(
             self.entradaConexionNombreDB.get(),
             self.entradaConexionUsuarioDB.get(),
             self.entradaConexionClaveDB.get(),
-            self.entradaConexionPuertoDB.get(),
+            int(self.entradaConexionPuertoDB.get()),
         )
-        print(prueba)
+        if resultado == "Prueba de conectividad a la db Exitosa":
+            ms.showinfo("Exitoso", f"{resultado}")
+        else:
+            ms.showinfo("Exitoso", "Revise los datos ingresados")
 
 
 prueba = ventanas()
