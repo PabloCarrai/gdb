@@ -63,12 +63,45 @@ class ventanas:
 
         #   Boton de Probar Conexion
         self.frame1BotonPruebaConexion = Button(
-            self.labelframeFrame1Conexion, text="Prueba de Conexion",command=self.probar_conexion
+            self.labelframeFrame1Conexion,
+            text="Prueba de Conexion",
+            command=self.probar_conexion,
         )
         self.frame1BotonPruebaConexion.grid(column=1, row=4, padx=10, pady=10)
 
         #   Creo los frame
         self.frame2 = ttk.Frame(self.notebook)
+        #   Creo el labelframe del listado de DBs
+        self.labelframeFrame2ListadoDBs = ttk.Labelframe(self.frame2, text="DBs")
+        self.labelframeFrame2ListadoDBs.grid(padx=10, pady=10)
+        #   Etiqueta Host solapa Listado de DBs
+        self.frame2EtiquetaHostListadoDBs = Label(
+            self.labelframeFrame2ListadoDBs, text="Host"
+        )
+        self.frame2EtiquetaHostListadoDBs.grid(column=0, row=0, padx=10, pady=10)
+        #   Stringvar del host solapa listado dbs
+        self.frame2DatoEntradaHostListadoDBS = StringVar()
+        #   entrada Host Listado dbs
+        self.frame2EntradaHostListadoDBS = Entry(
+            self.labelframeFrame2ListadoDBs,
+            textvariable=self.frame2DatoEntradaHostListadoDBS,
+        )
+        self.frame2EntradaHostListadoDBS.grid(column=1, row=0, padx=10, pady=10)
+        #   Label Usuario listado dbs
+        self.frame2EtiquetaUsuarioListadoDBS = Label(
+            self.labelframeFrame2ListadoDBs, text="Usuario"
+        )
+        self.frame2EtiquetaUsuarioListadoDBS.grid(column=0, row=1, padx=10, pady=10)
+        #   Stringvar Usuario Listado dbs
+        self.frame2DatoEntradaUsuarioListadoDBS=StringVar()
+        #   Entrada Usuario listado dbs
+        self.frame2EntradaUsuarioListadoDBS=Entry(self.labelframeFrame2ListadoDBs,textvariable=self.frame2DatoEntradaUsuarioListadoDBS)
+        self.frame2EntradaUsuarioListadoDBS.grid(column=1,row=1, padx=10, pady=10)
+        #   Etiqueta Clave listado dbs
+        self.frame2EtiquetaClaveListadoDBS=Label(self.labelframeFrame2ListadoDBs,text="Clave")
+        self.frame2EtiquetaClaveListadoDBS.grid(column=0,row=2, padx=10, pady=10)
+
+
         #   Creo los frame
         self.frame3 = ttk.Frame(self.notebook)
 
@@ -85,7 +118,7 @@ class ventanas:
             self.frame1datosEntradaHost.get(),
             self.frame1datoEntradaUsuario.get(),
             self.frame1datoEntradaClave.get(),
-            int(self.frame1datoEntradaPuerto.get())
+            int(self.frame1datoEntradaPuerto.get()),
         )
         if resultado == "Prueba de conectividad a la db Exitosa":
             ms.showinfo("Exitoso", f"{resultado}")
