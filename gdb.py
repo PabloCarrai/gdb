@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import ttk
+import LogicaDB as lg
 
 
 class ventanas:
@@ -45,7 +46,32 @@ class ventanas:
         )
         self.entradaConexionClaveDB.grid(column=1, row=2, padx=10, pady=10)
 
+        self.etiquetaConexionPuertoDB = Label(self.labelframeConexion, text="Puerto")
+        self.etiquetaConexionPuertoDB.grid(column=0, row=3, padx=10, pady=10)
+
+        self.datoEntradaConexionPuertoDB = StringVar()
+        self.entradaConexionPuertoDB = Entry(
+            self.labelframeConexion, textvariable=self.datoEntradaConexionPuertoDB
+        )
+        self.entradaConexionPuertoDB.grid(column=1, row=3, padx=10, pady=10)
+
+        self.botonConexionDB = Button(
+            self.labelframeConexion,
+            text="Probar Conexion",
+            command=self.probar_conexion,
+        )
+        self.botonConexionDB.grid(column=1, row=4, padx=10, pady=10)
+
         self.ventana.mainloop()
+
+    def probar_conexion(self):
+        prueba = lg.gestordb(
+            self.entradaConexionNombreDB.get(),
+            self.entradaConexionUsuarioDB.get(),
+            self.entradaConexionClaveDB.get(),
+            self.entradaConexionPuertoDB.get(),
+        )
+        print(prueba)
 
 
 prueba = ventanas()
