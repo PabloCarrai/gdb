@@ -6,82 +6,86 @@ from tkinter import messagebox as ms
 
 class ventanas:
     def __init__(self):
+        #   Ventana principal
         self.ventana = Tk()
         self.ventana.title("Bienvenido a gdb")
 
-        self.notebookConexion = ttk.Notebook(self.ventana)
-        self.notebookConexion.grid(column=0, row=0, padx=10, pady=10)
+        #   Definimos el notebook
+        self.notebook = ttk.Notebook(self.ventana)
+        self.notebook.grid(padx=10, pady=10)
 
-        self.frameConexion = ttk.Frame(self.notebookConexion, width=400, height=280)
-        self.frameConexion.grid(column=0, row=0, padx=10, pady=10)
+        #   Creo los frame
+        self.frame1 = ttk.Frame(self.notebook)
 
-        self.frameListado = ttk.Frame(self.notebookConexion, width=400, height=280)
-        self.frameListado.grid(column=0, row=0, padx=10, pady=10)
-
-        self.notebookConexion.add(self.frameConexion, text="Prueba Conexion")
-        self.notebookConexion.add(self.frameListado, text="Listado DBs")
-
-        self.labelframeConexion = ttk.LabelFrame(
-            self.frameConexion, text="Datos de Conexion"
+        self.labelframeFrame1Conexion = ttk.Labelframe(self.frame1, text="Conexion")
+        self.labelframeFrame1Conexion.grid(padx=10, pady=10)
+        #   Etiqueta Host
+        self.frame1EtiquetaHost = Label(self.labelframeFrame1Conexion, text="Host")
+        self.frame1EtiquetaHost.grid(column=0, row=0)
+        #   Stringvar de la entrada host
+        self.frame1datosEntradaHost = StringVar()
+        self.frame1EntradaHost = Entry(
+            self.labelframeFrame1Conexion, textvariable=self.frame1datosEntradaHost
         )
-        self.labelframeConexion.grid(column=0, row=0, padx=10, pady=10)
-
-        self.etiquetaConexionNombreDB = Label(self.labelframeConexion, text="Host")
-        self.etiquetaConexionNombreDB.grid(column=0, row=0, padx=10, pady=10)
-
-        self.datoEntradaConexionNombreDB = StringVar()
-        self.entradaConexionNombreDB = ttk.Entry(
-            self.labelframeConexion, textvariable=self.datoEntradaConexionNombreDB
+        self.frame1EntradaHost.grid(column=1, row=0, padx=10, pady=10)
+        #   Label Usuario
+        self.frame1EtiquetaUsuario = Label(
+            self.labelframeFrame1Conexion, text="Usuario"
         )
-        self.entradaConexionNombreDB.grid(column=1, row=0, padx=10, pady=10)
-
-        self.etiquetaConexionUsuarioDB = Label(self.labelframeConexion, text="Usuario")
-        self.etiquetaConexionUsuarioDB.grid(column=0, row=1, padx=10, pady=10)
-
-        self.datoEntradaConexionUsuarioDB = StringVar()
-        self.entradaConexionUsuarioDB = Entry(
-            self.labelframeConexion, textvariable=self.datoEntradaConexionUsuarioDB
+        self.frame1EtiquetaUsuario.grid(column=0, row=1, padx=10, pady=10)
+        #   Stringvar de la entrada Usuario
+        self.frame1datoEntradaUsuario = StringVar()
+        #   Entrada Usuario
+        self.frame1EntradaUsuario = Entry(
+            self.labelframeFrame1Conexion, textvariable=self.frame1datoEntradaUsuario
         )
-        self.entradaConexionUsuarioDB.grid(column=1, row=1, padx=10, pady=10)
-
-        self.etiquetaConexionClaveDB = Label(self.labelframeConexion, text="Clave")
-        self.etiquetaConexionClaveDB.grid(column=0, row=2, padx=10, pady=10)
-
-        self.datoEntradaConexionClaveDB = StringVar()
-        self.entradaConexionClaveDB = Entry(
-            self.labelframeConexion, textvariable=self.datoEntradaConexionClaveDB
+        self.frame1EntradaUsuario.grid(column=1, row=1, padx=10, pady=10)
+        #   Etiqueta Clave
+        self.frame1etiquetaClave = Label(self.labelframeFrame1Conexion, text="Clave")
+        self.frame1etiquetaClave.grid(column=0, row=2, padx=10, pady=10)
+        #   Stringvar de la Clave
+        self.frame1datoEntradaClave = StringVar()
+        #   Entrada de la Clave
+        self.frame1datoEntradaClave = Entry(
+            self.labelframeFrame1Conexion, textvariable=self.frame1datoEntradaClave
         )
-        self.entradaConexionClaveDB.grid(column=1, row=2, padx=10, pady=10)
-
-        self.etiquetaConexionPuertoDB = Label(self.labelframeConexion, text="Puerto")
-        self.etiquetaConexionPuertoDB.grid(column=0, row=3, padx=10, pady=10)
-
-        self.datoEntradaConexionPuertoDB = StringVar()
-        self.entradaConexionPuertoDB = Entry(
-            self.labelframeConexion, textvariable=self.datoEntradaConexionPuertoDB
+        self.frame1datoEntradaClave.grid(column=1, row=2, padx=10, pady=10)
+        #   Etiqueta de Puerto
+        self.frame1etiquetaPuerto = Label(self.labelframeFrame1Conexion, text="Puerto")
+        self.frame1etiquetaPuerto.grid(column=0, row=3, padx=10, pady=10)
+        #   Stringvar del Puerto
+        self.frame1datoEntradaPuerto = StringVar()
+        #   Entry del puerto
+        self.frame1EntradaPuerto = Entry(
+            self.labelframeFrame1Conexion, textvariable=self.frame1datoEntradaPuerto
         )
-        self.entradaConexionPuertoDB.grid(column=1, row=3, padx=10, pady=10)
+        self.frame1EntradaPuerto.grid(column=1, row=3, padx=10, pady=10)
 
-        self.botonConexionDB = Button(
-            self.labelframeConexion,
-            text="Probar Conexion",
-            command=self.probar_conexion,
+        #   Boton de Probar Conexion
+        self.frame1BotonPruebaConexion = Button(
+            self.labelframeFrame1Conexion, text="Prueba de Conexion",command=self.probar_conexion
         )
-        self.botonConexionDB.grid(column=1, row=4, padx=10, pady=10)
+        self.frame1BotonPruebaConexion.grid(column=1, row=4, padx=10, pady=10)
 
+        #   Creo los frame
+        self.frame2 = ttk.Frame(self.notebook)
+        #   Creo los frame
+        self.frame3 = ttk.Frame(self.notebook)
 
-
-
+        #   Agrego los frame al notebook
+        self.notebook.add(self.frame1, text="Prueba de Conexion al Servidor")
+        self.notebook.add(self.frame2, text="Listado DBs")
+        self.notebook.add(self.frame3, text="tab3")
 
         self.ventana.mainloop()
 
     def probar_conexion(self):
         prueba = lg.gestordb()
         resultado = prueba.prueba_Conectividad(
-            self.entradaConexionNombreDB.get(),
-            self.entradaConexionUsuarioDB.get(),
-            self.entradaConexionClaveDB.get(),
-            int(self.entradaConexionPuertoDB.get()),
+            self.frame1datosEntradaHost.get(),
+            self.frame1datoEntradaUsuario.get(),
+            self.frame1datoEntradaClave.get(),
+            int(self.frame1datoEntradaPuerto.get())
         )
         if resultado == "Prueba de conectividad a la db Exitosa":
             ms.showinfo("Exitoso", f"{resultado}")
